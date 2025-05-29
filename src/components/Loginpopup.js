@@ -25,13 +25,13 @@ export default function Loginpopup({
     try {
       setIsLoggingIn(true);
       const result = await fetchDataApi('POST', 'auth/login', { username, password });
-      
+      console.log('Login Result:', result);
       if (result.error) {
         setError(result.error);
         return;
       }
       else{
-        setShowOtpPopup(true);
+        handleOtpSuccess(result.token);
       }
       
     } catch (error) {
@@ -124,14 +124,14 @@ export default function Loginpopup({
       </div>
     </div>
 
-      <PopupOTP 
+      {/* <PopupOTP 
         isOpen={showOtpPopup}
         onClose={() => setShowOtpPopup(false)}
         email={username}
         password={password}
         username={username}
         onVerificationSuccess={handleOtpSuccess}
-      />
+      /> */}
     </>
   );
 }
